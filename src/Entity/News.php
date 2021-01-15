@@ -90,4 +90,6 @@ class News
 
         return $this;
     }
+
+
 }
