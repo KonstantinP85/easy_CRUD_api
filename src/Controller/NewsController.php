@@ -86,4 +86,19 @@ class NewsController extends BaseController
 
         return $this->respond(null);
     }
+    /**
+     * @Route ("/news/today", name="news_order")
+     * @param Request $request
+     * @return Response
+     */
+    public function orderByTodayAction(Request $request)
+    {
+        $date = date_create(date("Y-m-d"));
+        $news = $this->getDoctrine()->getRepository(News::class)->findBy(['date'=>$date]);
+        if(!$news) {
+            throw new NotFoundHttpException('News not found');
+        }
+        return $this->respond($news);
+    }
+
 }
