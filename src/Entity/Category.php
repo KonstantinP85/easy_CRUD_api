@@ -35,9 +35,9 @@ class Category
     private $news;
 
     /**
-     * @ORM\ManyToOne(targetEntity=ReaderPersonalAccount::class, inversedBy="category")
+     * @ORM\ManyToOne(targetEntity=Reader::class, inversedBy="Category")
      */
-    private $readerPersonalAccount;
+    private $reader;
 
     public function __construct()
     {
@@ -75,12 +75,12 @@ class Category
 
     /**
      * @return Collection|News[]
-     */
+     *
     public function getNews(): Collection
     {
         return $this->news;
     }
-
+*/
     public function addNews(News $news): self
     {
         if (!$this->news->contains($news)) {
@@ -103,16 +103,15 @@ class Category
         return $this;
     }
 
-    public function getReaderPersonalAccount(): ?ReaderPersonalAccount
+    public function getReader(): ?Reader
     {
-        return $this->readerPersonalAccount;
+        return $this->reader;
     }
 
-    public function setReaderPersonalAccount(?ReaderPersonalAccount $readerPersonalAccount): self
+    public function setReader(?Reader $reader): self
     {
-        $this->readerPersonalAccount = $readerPersonalAccount;
+        $this->reader = $reader;
 
         return $this;
     }
-
 }

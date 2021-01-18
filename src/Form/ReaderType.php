@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Reader;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -29,6 +31,15 @@ class ReaderType extends AbstractType
                         'message'=>'Email can not be blank'
                     ]),
                     new Email(),
+                ]
+            ))
+            ->add('category', EntityType::class, array(
+                'class'=> Category::class,
+                'multiple'=>true,
+                'constraints' => [
+                    new NotNull([
+                        'message'=>'Category can not be blank'
+                    ]),
                 ]
             ))
         ;
