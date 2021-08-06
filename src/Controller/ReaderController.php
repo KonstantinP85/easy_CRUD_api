@@ -1,11 +1,8 @@
 <?php
 
-
 namespace App\Controller;
 
-
 use App\Entity\Reader;
-use App\Entity\ReaderAccount;
 use App\Form\ReaderType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +17,7 @@ class ReaderController extends BaseController
      * @param Request $request
      * @return Response
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request): Response
     {
         $reader = $this->getDoctrine()->getRepository(Reader::class)->findAll();
 
@@ -32,7 +29,7 @@ class ReaderController extends BaseController
      * @param Request $request
      * @return Response
      */
-    public function readerAction(Request $request)
+    public function readerAction(Request $request): Response
     {
         $id=$request->get('id');
         $reader = $this->getDoctrine()->getRepository(Reader::class)->findOneBy(['id'=>$id]);
@@ -45,13 +42,12 @@ class ReaderController extends BaseController
      * @param Request $request
      * @return Response
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request): Response
     {
         $reader = new Reader();
         $form = $this->createForm(ReaderType::class, $reader);
         $form->submit($request->request->all());
-        if (!$form->isValid())
-        {
+        if (!$form->isValid()) {
             return $this->respond($form, Response::HTTP_BAD_REQUEST);
         }
         $this->getDoctrine()->getManager()->persist($reader);
@@ -59,12 +55,13 @@ class ReaderController extends BaseController
 
         return $this->respond($reader);
     }
+
     /**
      * @Route ("/reader/{id}/update", name="reader_update")
      * @param Request $request
      * @return Response
      */
-    public function updateAction(Request $request)
+    public function updateAction(Request $request): Response
     {
         $id=$request->get('id');
         $reader = $this->getDoctrine()->getRepository(Reader::class)->findOneBy(['id'=>$id]);
@@ -73,8 +70,7 @@ class ReaderController extends BaseController
         }
         $form = $this->createForm(ReaderType::class, $reader);
         $form->submit($request->request->all());
-        if (!$form->isValid())
-        {
+        if (!$form->isValid()) {
             return $this->respond($form, Response::HTTP_BAD_REQUEST);
         }
         $this->getDoctrine()->getManager()->persist($reader);
@@ -88,7 +84,7 @@ class ReaderController extends BaseController
      * @param Request $request
      * @return Response
      */
-    public function deleteAction(Request $request)
+    public function deleteAction(Request $request): Response
     {
         $id=$request->get('id'); echo $id;
         $reader = $this->getDoctrine()->getRepository(Reader::class)->findOneBy(['id'=>$id]);

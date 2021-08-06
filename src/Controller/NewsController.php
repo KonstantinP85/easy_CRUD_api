@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Controller;
-
 
 use App\Entity\News;
 use App\Form\NewsType;
@@ -19,9 +17,10 @@ class NewsController extends BaseController
      * @param Request $request
      * @return Response
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request): Response
     {
         $news = $this->getDoctrine()->getRepository(News::class)->findAll();
+
         return $this->respond($news);
     }
 
@@ -30,13 +29,12 @@ class NewsController extends BaseController
      * @param Request $request
      * @return Response
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request): Response
     {
         $news = new News();
         $form = $this->createForm(NewsType::class, $news);
         $form->submit($request->request->all());
-        if (!$form->isValid())
-        {
+        if (!$form->isValid()) {
             return $this->respond($form, Response::HTTP_BAD_REQUEST);
         }
         $this->getDoctrine()->getManager()->persist($news);
@@ -50,7 +48,7 @@ class NewsController extends BaseController
      * @param Request $request
      * @return Response
      */
-    public function updateAction(Request $request)
+    public function updateAction(Request $request): Response
     {
         $id=$request->get('id');
         $news = $this->getDoctrine()->getRepository(News::class)->findOneBy(['id'=>$id]);
@@ -59,8 +57,7 @@ class NewsController extends BaseController
         }
         $form = $this->createForm(NewsType::class, $news);
         $form->submit($request->request->all());
-        if (!$form->isValid())
-        {
+        if (!$form->isValid()) {
             return $this->respond($form, Response::HTTP_BAD_REQUEST);
         }
         $this->getDoctrine()->getManager()->persist($news);
@@ -74,7 +71,7 @@ class NewsController extends BaseController
      * @param Request $request
      * @return Response
      */
-    public function deleteAction(Request $request)
+    public function deleteAction(Request $request): Response
     {
         $id=$request->get('id');
         $news = $this->getDoctrine()->getRepository(News::class)->findOneBy(['id'=>$id]);
@@ -86,12 +83,13 @@ class NewsController extends BaseController
 
         return $this->respond(null);
     }
+
     /**
      * @Route ("/news/today", name="news_order")
      * @param Request $request
      * @return Response
      */
-    public function orderByTodayAction(Request $request)
+    public function orderByTodayAction(Request $request): Response
     {
         $date = date_create(date("Y-m-d"));
         $news = $this->getDoctrine()->getRepository(News::class)->findBy(['date'=>$date]);
@@ -100,5 +98,4 @@ class NewsController extends BaseController
         }
         return $this->respond($news);
     }
-
 }

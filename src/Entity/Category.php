@@ -44,16 +44,26 @@ class Category
         $this->news = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+    /**
+     * @param string $title
+     * @return $this
+     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
@@ -61,11 +71,18 @@ class Category
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
+    /**
+     * @param string $description
+     * @return $this
+     */
     public function setDescription(string $description): self
     {
         $this->description = $description;
@@ -75,12 +92,16 @@ class Category
 
     /**
      * @return Collection|News[]
-     *
+     */
     public function getNews(): Collection
     {
         return $this->news;
     }
-*/
+
+    /**
+     * @param News $news
+     * @return $this
+     */
     public function addNews(News $news): self
     {
         if (!$this->news->contains($news)) {
@@ -91,6 +112,10 @@ class Category
         return $this;
     }
 
+    /**
+     * @param News $news
+     * @return $this
+     */
     public function removeNews(News $news): self
     {
         if ($this->news->removeElement($news)) {
@@ -103,11 +128,18 @@ class Category
         return $this;
     }
 
+    /**
+     * @return Reader|null
+     */
     public function getReader(): ?Reader
     {
         return $this->reader;
     }
 
+    /**
+     * @param Reader|null $reader
+     * @return $this
+     */
     public function setReader(?Reader $reader): self
     {
         $this->reader = $reader;

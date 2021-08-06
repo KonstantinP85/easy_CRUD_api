@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Controller;
-
 
 use App\Entity\Category;
 use App\Form\CategoryType;
@@ -19,9 +17,10 @@ class CategoryController extends BaseController
      * @param Request $request
      * @return Response
      */
-    public function indexAction(Request $request)
+    public function indexAction(Request $request): Response
     {
         $category = $this->getDoctrine()->getRepository(Category::class)->findAll();
+
         return $this->respond($category);
     }
 
@@ -30,13 +29,12 @@ class CategoryController extends BaseController
      * @param Request $request
      * @return Response
      */
-    public function createAction(Request $request)
+    public function createAction(Request $request): Response
     {
         $category = new Category();
         $form = $this->createForm(CategoryType::class, $category);
         $form->submit($request->request->all());
-        if (!$form->isValid())
-        {
+        if (!$form->isValid()) {
             return $this->respond($form, Response::HTTP_BAD_REQUEST);
         }
         $this->getDoctrine()->getManager()->persist($category);
@@ -50,7 +48,7 @@ class CategoryController extends BaseController
      * @param Request $request
      * @return Response
      */
-    public function updateAction(Request $request)
+    public function updateAction(Request $request): Response
     {
         $id=$request->get('id');
         $reader = $this->getDoctrine()->getRepository(Category::class)->findOneBy(['id'=>$id]);
@@ -59,8 +57,7 @@ class CategoryController extends BaseController
         }
         $form = $this->createForm(CategoryType::class, $reader);
         $form->submit($request->request->all());
-        if (!$form->isValid())
-        {
+        if (!$form->isValid()) {
             return $this->respond($form, Response::HTTP_BAD_REQUEST);
         }
         $this->getDoctrine()->getManager()->persist($reader);
@@ -74,7 +71,7 @@ class CategoryController extends BaseController
      * @param Request $request
      * @return Response
      */
-    public function deleteAction(Request $request)
+    public function deleteAction(Request $request): Response
     {
         $id=$request->get('id');
         $reader = $this->getDoctrine()->getRepository(Category::class)->findOneBy(['id'=>$id]);

@@ -39,16 +39,26 @@ class Reader
         $this->Category = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     * @return $this
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -56,11 +66,18 @@ class Reader
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /**
+     * @param string $email
+     * @return $this
+     */
     public function setEmail(string $email): self
     {
         $this->email = $email;
@@ -76,6 +93,10 @@ class Reader
         return $this->Category;
     }
 
+    /**
+     * @param Category $category
+     * @return $this
+     */
     public function addCategory(Category $category): self
     {
         if (!$this->Category->contains($category)) {
@@ -86,10 +107,13 @@ class Reader
         return $this;
     }
 
+    /**
+     * @param Category $category
+     * @return $this
+     */
     public function removeCategory(Category $category): self
     {
         if ($this->Category->removeElement($category)) {
-            // set the owning side to null (unless already changed)
             if ($category->getReader() === $this) {
                 $category->setReader(null);
             }
@@ -97,5 +121,4 @@ class Reader
 
         return $this;
     }
-
 }

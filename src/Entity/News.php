@@ -38,16 +38,26 @@ class News
      */
     private $date;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return Category|null
+     */
     public function getCategory(): ?Category
     {
         return $this->category;
     }
 
+    /**
+     * @param Category|null $category
+     * @return $this
+     */
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
@@ -55,11 +65,18 @@ class News
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+    /**
+     * @param string $title
+     * @return $this
+     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
@@ -67,11 +84,18 @@ class News
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getContent(): ?string
     {
         return $this->content;
     }
 
+    /**
+     * @param string $content
+     * @return $this
+     */
     public function setContent(string $content): self
     {
         $this->content = $content;
@@ -79,17 +103,22 @@ class News
         return $this;
     }
 
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
     }
 
+    /**
+     * @param \DateTimeInterface $date
+     * @return $this
+     */
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
 
         return $this;
     }
-
-
 }

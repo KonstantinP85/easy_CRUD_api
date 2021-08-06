@@ -7,19 +7,21 @@ namespace DoctrineMigrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
 final class Version20210118031323 extends AbstractMigration
 {
+    /**
+     * @return string
+     */
     public function getDescription() : string
     {
         return '';
     }
 
+    /**
+     * @param Schema $schema
+     */
     public function up(Schema $schema) : void
     {
-        // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SEQUENCE reader_account_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE TABLE reader_account (id INT NOT NULL, name_id INT NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_1F5BEE6871179CD6 ON reader_account (name_id)');
@@ -29,9 +31,11 @@ final class Version20210118031323 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_64C19C11CC109A9 ON category (reader_account_id)');
     }
 
+    /**
+     * @param Schema $schema
+     */
     public function down(Schema $schema) : void
     {
-        // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SCHEMA public');
         $this->addSql('ALTER TABLE category DROP CONSTRAINT FK_64C19C11CC109A9');
         $this->addSql('DROP SEQUENCE reader_account_id_seq CASCADE');
